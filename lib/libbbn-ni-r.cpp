@@ -11,14 +11,14 @@ void init() {
 
 //Cleanup NI library -- destructor hook in header
 void cleanup(){
-  if (isOpen) {NiFpga_Close(session, 0)};
+  if (isOpen) {NiFpga_Close(session, 0);};
   NiFpga_Finalize();
 }
 
 BBN_NI_R_STATUS open_load_run(){
-  niFpga_Status status = NiFpga_Open(NiFpga_FPGA_VI_Bitfile,
+  NiFpga_Status status = NiFpga_Open(NiFpga_FPGA_VI_Bitfile,
                                       NiFpga_FPGA_VI_Signature,
-                                      "RIO0", 0, &session));
+                                      "RIO0", 0, &session);
   if (status == NiFpga_Status_Success){
     isOpen = true;
   }

@@ -9,7 +9,7 @@ Simple library for data acquisition using NI-USB 7855
 
 #include "NiFpga_FPGA_VI.h"
 
-typedef int BBN_NI_R_STATUS
+typedef int BBN_NI_R_STATUS;
 
 #ifdef __cplusplus
 extern "C" {

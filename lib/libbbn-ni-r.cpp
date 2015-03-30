@@ -25,11 +25,13 @@ BBN_NI_R_STATUS open_load_run(){
   return status;
 }
 
-BBN_NI_R_STATUS set_numSamples(unsigned numSamples){
-  return 0;
+BBN_NI_R_STATUS set_numSamples(uint32_t numSamples){
+  NiFpga_Status status = NiFpga_WriteU32(session, NiFpga_SimpleDigitizer_VI_ControlU32_NumberofSamples, numSamples);
+  return status;
 };
-BBN_NI_R_STATUS get_numSamples(unsigned* numSamples){
-  return 0;
+BBN_NI_R_STATUS get_numSamples(uint32_t* numSamples){
+  NiFpga_Status status = NiFpga_ReadU32(session, NiFpga_SimpleDigitizer_VI_ControlU32_NumberofSamples, numSamples);
+  return status;
 };
 
 BBN_NI_R_STATUS set_sampleInterval(unsigned sampleInterval){

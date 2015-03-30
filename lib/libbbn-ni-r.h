@@ -20,8 +20,8 @@ void cleanup() __attribute__((destructor));
 
 BBN_NI_R_STATUS open_load_run();
 
-BBN_NI_R_STATUS set_numSamples(unsigned numSamples);
-BBN_NI_R_STATUS get_numSamples(unsigned* numSamples);
+BBN_NI_R_STATUS set_numSamples(uint32_t numSamples);
+BBN_NI_R_STATUS get_numSamples(uint32_t* numSamples);
 
 BBN_NI_R_STATUS set_sampleInterval(unsigned sampleInterval);
 BBN_NI_R_STATUS get_sampleInterval(unsigned* sampleInterval);

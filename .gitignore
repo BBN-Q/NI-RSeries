@@ -16,5 +16,8 @@
 *.lvlps
 
 
-#C library build 
+#C library build
 /lib/build
+
+#FPGA bit files
+*.lvbitx

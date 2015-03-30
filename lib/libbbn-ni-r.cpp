@@ -34,9 +34,14 @@ BBN_NI_R_STATUS get_numSamples(uint32_t* numSamples){
   return status;
 };
 
-BBN_NI_R_STATUS set_sampleInterval(unsigned sampleInterval){
-  return 0;
+BBN_NI_R_STATUS set_sampleInterval(double sampleInterval){
+  uint32_t sampleInterval_us = static_cast<uint32_t>(sampleInterval/1e6);
+  NiFpga_Status status = NiFpga_WriteU32(session, NiFpga_SimpleDigitizer_VI_ControlU32_SampleIntervaluSec, sampleInterval * 1000000);
+  return status;
 };
-BBN_NI_R_STATUS get_sampleInterval(unsigned* sampleInterval){
-  return 0;
+BBN_NI_R_STATUS get_sampleInterval(double* sampleInterval){
+  uint32_t sampleInterval_us;
+  NiFpga_Status status = NiFpga_ReadU32(session, NiFpga_SimpleDigitizer_VI_ControlU32_SampleIntervaluSec, &sampleInterval_us);
+  *sampleInterval = static_cast<double>(sampleInterval_us) / 1000000;
+  return status;
 };

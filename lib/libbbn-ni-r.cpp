@@ -16,8 +16,8 @@ void cleanup(){
 }
 
 BBN_NI_R_STATUS open_load_run(){
-  NiFpga_Status status = NiFpga_Open(NiFpga_FPGA_VI_Bitfile,
-                                      NiFpga_FPGA_VI_Signature,
+  NiFpga_Status status = NiFpga_Open(NiFpga_SimpleDigitizer_VI_Bitfile,
+                                      NiFpga_SimpleDigitizer_VI_Signature,
                                       "RIO0", 0, &session);
   if (status == NiFpga_Status_Success){
     isOpen = true;

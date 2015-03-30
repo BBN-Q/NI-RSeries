@@ -7,7 +7,7 @@ Simple library for data acquisition using NI-USB 7855
 #ifndef LIBBBN_NI_R_H
 #define LIBBBN_NI_R_H
 
-#include "NiFpga_FPGA_VI.h"
+#include "NiFpga_SimpleDigitizer_VI.h"
 
 typedef int BBN_NI_R_STATUS;
 

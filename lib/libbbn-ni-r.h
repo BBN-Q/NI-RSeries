@@ -31,6 +31,8 @@ BBN_NI_R_STATUS disable_acquisition();
 
 BBN_NI_R_STATUS trigger();
 
+BBN_NI_R_STATUS transfer_waveform(unsigned, int16_t*, double);
+
 #ifdef __cplusplus
 }
 #endif

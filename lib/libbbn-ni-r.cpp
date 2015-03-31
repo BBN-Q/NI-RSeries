@@ -60,3 +60,10 @@ BBN_NI_R_STATUS trigger(){
   NiFpga_MergeStatus(&status, NiFpga_WriteBool(session, NiFpga_SimpleDigitizer_VI_ControlBool_Trigger, NiFpga_True));
   return status;
 }
+
+BBN_NI_R_STATUS transfer_waveform(unsigned numPoints, int16_t* data, double timeOut){
+  // Ask for a number of points from the FIFO
+  // Assumes memory has been correctly allocated
+  uint32_t timeOut_ms = timeOut*1e3;
+  return NiFpga_ReadFifoI16(session, NiFpga_SimpleDigitizer_VI_TargetToHostFifoI16_AIFIFO, data, numPoints, timeOut_ms, nullptr);
+}

@@ -26,6 +26,10 @@ BBN_NI_R_STATUS get_numSamples(uint32_t* numSamples);
 BBN_NI_R_STATUS set_sampleInterval(double sampleInterval);
 BBN_NI_R_STATUS get_sampleInterval(double* sampleInterval);
 
+BBN_NI_R_STATUS enable_acquisition();
+BBN_NI_R_STATUS disable_acquisition();
+
+BBN_NI_R_STATUS trigger();
 
 #ifdef __cplusplus
 }

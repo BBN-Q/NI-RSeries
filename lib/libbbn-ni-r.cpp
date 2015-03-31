@@ -45,3 +45,18 @@ BBN_NI_R_STATUS get_sampleInterval(double* sampleInterval){
   *sampleInterval = static_cast<double>(sampleInterval_us) / 1000000;
   return status;
 };
+
+BBN_NI_R_STATUS enable_acquisition(){
+  return NiFpga_WriteBool(session, NiFpga_SimpleDigitizer_VI_ControlBool_Acquire, 1);
+}
+
+BBN_NI_R_STATUS disable_acquisition(){
+  return NiFpga_WriteBool(session, NiFpga_SimpleDigitizer_VI_ControlBool_Acquire, 0);
+}
+
+BBN_NI_R_STATUS trigger(){
+  //Toggle the trigger rising-edge
+  NiFpga_Status status = NiFpga_WriteBool(session, NiFpga_SimpleDigitizer_VI_ControlBool_Trigger, 0);
+  NiFpga_MergeStatus(&status, NiFpga_WriteBool(session, NiFpga_SimpleDigitizer_VI_ControlBool_Trigger, 1));
+  return status;
+}

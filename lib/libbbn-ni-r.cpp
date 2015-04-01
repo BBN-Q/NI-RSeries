@@ -1,12 +1,15 @@
 #include "libbbn-ni-r.h"
 
+#include <vector>
+#include <algorithm> // std::transform
+
 //global to hold on to session handle
 NiFpga_Session session;
 bool isOpen = false;
 
 //Initialize FPGA on loading the library -- constructor hook in header
 void init() {
-  NiFpga_Status status = NiFpga_Initialize();
+  NiFpga_Initialize();
 }
 
 //Cleanup NI library -- destructor hook in header
@@ -34,7 +37,6 @@ BBN_NI_R_STATUS get_numSamples(uint32_t* numSamples){
 };
 
 BBN_NI_R_STATUS set_sampleInterval(double sampleInterval){
-  uint32_t sampleInterval_us = static_cast<uint32_t>(sampleInterval/1e6);
   NiFpga_Status status = NiFpga_WriteU32(session, NiFpga_SimpleDigitizer_VI_ControlU32_SampleIntervaluSec, sampleInterval * 1000000);
   return status;
 };
@@ -69,19 +71,27 @@ BBN_NI_R_STATUS trigger_out(){
   return status;
 }
 
-BBN_NI_R_STATUS transfer_waveform(unsigned numPoints, int32_t* data, double timeOut){
+BBN_NI_R_STATUS transfer_waveform(unsigned numPoints, double* data, double timeOut){
   // Ask for a number of points from the FIFO
-  // Assumes memory has been correctly allocated
+  // Assumes memory has been correctly allocated by caller
   uint32_t timeOut_ms = timeOut*1e3;
-  return NiFpga_ReadFifoI32(session, NiFpga_SimpleDigitizer_VI_TargetToHostFifoI32_AIFIFO, data, numPoints, timeOut_ms, nullptr);
+  std::vector<int32_t> data_int32;
+  data_int32.resize(numPoints);
+  NiFpga_Status status = NiFpga_ReadFifoI32(session, NiFpga_SimpleDigitizer_VI_TargetToHostFifoI32_AIFIFO, data_int32.data(), numPoints, timeOut_ms, nullptr);
+  std::transform(data_int32.begin(), data_int32.end(), data, [](int32_t x){return static_cast<double>(x)/(1 << 22);});
+  return status;
 }
 
-BBN_NI_R_STATUS get_analogOut(int16_t* val){
-  return NiFpga_ReadI16(session, NiFpga_SimpleDigitizer_VI_IndicatorI16_AnalogOut, val);
+BBN_NI_R_STATUS get_analogOut(double* val){
+  int16_t val_int16;
+  NiFpga_Status status = NiFpga_ReadI16(session, NiFpga_SimpleDigitizer_VI_IndicatorI16_AnalogOut, &val_int16);
+  *val = static_cast<double>(val_int16) / (1 << 13);
+  return status;
 }
 
-BBN_NI_R_STATUS get_analogIn(int32_t* val){
+BBN_NI_R_STATUS get_analogIn(double* val){
   int32_t val_int32;
-  NiFpga_Status status = NiFpga_ReadI32(session, NiFpga_SimpleDigitizer_VI_IndicatorI32_AnalogIn, val);
+  NiFpga_Status status = NiFpga_ReadI32(session, NiFpga_SimpleDigitizer_VI_IndicatorI32_AnalogIn, &val_int32);
+  *val = static_cast<double>(val_int32) / (1 << 22);
   return status;
 }

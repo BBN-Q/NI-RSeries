@@ -45,21 +45,21 @@ function trigger_out()
 end
 
 function transfer_waveform(numPts, timeOut)
-  data = Array(Int32, numPts)
+  data = Array(Float64, numPts)
   check_status(ccall((:transfer_waveform, "libbbn-ni-r"), Cint,
-                      (Cuint, Ptr{Cint}, Cdouble),
+                      (Cuint, Ptr{Cdouble}, Cdouble),
                       numPts, data, timeOut))
   return data
 end
 
 function get_analogOut()
-  val = Ref{Cshort}(0)
-  check_status(ccall((:get_analogOut, "libbbn-ni-r"), Cint, (Ref{Cshort},), val))
+  val = Ref{Cdouble}(0)
+  check_status(ccall((:get_analogOut, "libbbn-ni-r"), Cint, (Ref{Cdouble},), val))
   return val[]
 end
 
 function get_analogIn()
-  val = Ref{Cint}(0)
-  check_status(ccall((:get_analogIn, "libbbn-ni-r"), Cint, (Ref{Cint},), val))
+  val = Ref{Cdouble}(0)
+  check_status(ccall((:get_analogIn, "libbbn-ni-r"), Cint, (Ref{Cdouble},), val))
   return val[]
 end

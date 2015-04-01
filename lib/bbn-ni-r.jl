@@ -45,9 +45,9 @@ function trigger_out()
 end
 
 function transfer_waveform(numPts, timeOut)
-  data = Array(Int16, numPts)
+  data = Array(Int32, numPts)
   check_status(ccall((:transfer_waveform, "libbbn-ni-r"), Cint,
-                      (Cuint, Ptr{Cshort}, Cdouble),
+                      (Cuint, Ptr{Cint}, Cdouble),
                       numPts, data, timeOut))
   return data
 end

@@ -32,7 +32,7 @@ BBN_NI_R_STATUS disable_acquisition();
 BBN_NI_R_STATUS trigger();
 BBN_NI_R_STATUS trigger_out();
 
-BBN_NI_R_STATUS transfer_waveform(unsigned, int16_t*, double);
+BBN_NI_R_STATUS transfer_waveform(unsigned, int32_t*, double);
 
 BBN_NI_R_STATUS get_analogOut(int16_t*);
 BBN_NI_R_STATUS get_analogIn(int32_t*);

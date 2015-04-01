@@ -47,3 +47,15 @@ function transfer_waveform(numPts, timeOut)
                       numPts, data, timeOut))
   return data
 end
+
+function get_analogOut()
+  val = Ref{Cshort}(0)
+  check_status(ccall((:get_analogOut, "libbbn-ni-r"), Cint, (Ref{Cshort},), val))
+  return val[]
+end
+
+function get_analogIn()
+  val = Ref{Cint}(0)
+  check_status(ccall((:get_analogIn, "libbbn-ni-r"), Cint, (Ref{Cint},), val))
+  return val[]
+end

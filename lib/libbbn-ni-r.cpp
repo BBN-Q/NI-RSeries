@@ -66,3 +66,13 @@ BBN_NI_R_STATUS transfer_waveform(unsigned numPoints, int16_t* data, double time
   uint32_t timeOut_ms = timeOut*1e3;
   return NiFpga_ReadFifoI16(session, NiFpga_SimpleDigitizer_VI_TargetToHostFifoI16_AIFIFO, data, numPoints, timeOut_ms, nullptr);
 }
+
+BBN_NI_R_STATUS get_analogOut(int16_t* val){
+  return NiFpga_ReadI16(session, NiFpga_SimpleDigitizer_VI_IndicatorI16_AnalogOut, val);
+}
+
+BBN_NI_R_STATUS get_analogIn(int32_t* val){
+  int32_t val_int32;
+  NiFpga_Status status = NiFpga_ReadI32(session, NiFpga_SimpleDigitizer_VI_IndicatorI32_AnalogIn, val);
+  return status;
+}

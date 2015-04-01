@@ -40,6 +40,10 @@ function trigger()
   check_status(ccall((:trigger, "libbbn-ni-r"), Cint, ()))
 end
 
+function trigger_out()
+  check_status(ccall((:trigger_out, "libbbn-ni-r"), Cint, ()))
+end
+
 function transfer_waveform(numPts, timeOut)
   data = Array(Int16, numPts)
   check_status(ccall((:transfer_waveform, "libbbn-ni-r"), Cint,

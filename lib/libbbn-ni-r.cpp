@@ -54,9 +54,18 @@ BBN_NI_R_STATUS disable_acquisition(){
 }
 
 BBN_NI_R_STATUS trigger(){
-  //Toggle the trigger rising-edge
+  //Toggle the software trigger
   NiFpga_Status status = NiFpga_WriteBool(session, NiFpga_SimpleDigitizer_VI_ControlBool_Trigger, NiFpga_False);
   NiFpga_MergeStatus(&status, NiFpga_WriteBool(session, NiFpga_SimpleDigitizer_VI_ControlBool_Trigger, NiFpga_True));
+  NiFpga_MergeStatus(&status, NiFpga_WriteBool(session, NiFpga_SimpleDigitizer_VI_ControlBool_Trigger, NiFpga_False));
+  return status;
+}
+
+BBN_NI_R_STATUS trigger_out(){
+  //Toggle the software trigger
+  NiFpga_Status status = NiFpga_WriteBool(session, NiFpga_SimpleDigitizer_VI_ControlBool_TriggerOut, NiFpga_False);
+  NiFpga_MergeStatus(&status, NiFpga_WriteBool(session, NiFpga_SimpleDigitizer_VI_ControlBool_TriggerOut, NiFpga_True));
+  NiFpga_MergeStatus(&status, NiFpga_WriteBool(session, NiFpga_SimpleDigitizer_VI_ControlBool_TriggerOut, NiFpga_False));
   return status;
 }
 

@@ -24,7 +24,7 @@
 /**
  * The signature of the FPGA bitfile.
  */
-static const char* const NiFpga_SimpleDigitizer_VI_Signature = "5A83878EFDE83FF707BDDEF34B72E566";
+static const char* const NiFpga_SimpleDigitizer_VI_Signature = "C29C2C233F64EA4E2E64B595D6BDBC05";
 
 typedef enum
 {
@@ -33,20 +33,21 @@ typedef enum
 
 typedef enum
 {
-   NiFpga_SimpleDigitizer_VI_IndicatorI32_AnalogIn = 0x14,
-   NiFpga_SimpleDigitizer_VI_IndicatorI32_sampleCt = 0x18,
+   NiFpga_SimpleDigitizer_VI_IndicatorI32_AnalogIn = 0x18,
+   NiFpga_SimpleDigitizer_VI_IndicatorI32_sampleCt = 0x1C,
 } NiFpga_SimpleDigitizer_VI_IndicatorI32;
 
 typedef enum
 {
-   NiFpga_SimpleDigitizer_VI_ControlBool_Acquire = 0x22,
-   NiFpga_SimpleDigitizer_VI_ControlBool_Trigger = 0x1E,
+   NiFpga_SimpleDigitizer_VI_ControlBool_Acquire = 0x26,
+   NiFpga_SimpleDigitizer_VI_ControlBool_Trigger = 0x16,
+   NiFpga_SimpleDigitizer_VI_ControlBool_TriggerOut = 0x22,
 } NiFpga_SimpleDigitizer_VI_ControlBool;
 
 typedef enum
 {
-   NiFpga_SimpleDigitizer_VI_ControlU32_NumberofSamples = 0x24,
-   NiFpga_SimpleDigitizer_VI_ControlU32_SampleIntervaluSec = 0x28,
+   NiFpga_SimpleDigitizer_VI_ControlU32_NumberofSamples = 0x28,
+   NiFpga_SimpleDigitizer_VI_ControlU32_SampleIntervaluSec = 0x2C,
 } NiFpga_SimpleDigitizer_VI_ControlU32;
 
 typedef enum

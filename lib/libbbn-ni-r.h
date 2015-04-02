@@ -32,6 +32,7 @@ BBN_NI_R_STATUS disable_acquisition();
 BBN_NI_R_STATUS trigger();
 BBN_NI_R_STATUS trigger_out();
 
+BBN_NI_R_STATUS reset_fifo();
 BBN_NI_R_STATUS transfer_waveform(unsigned, double*, double);
 
 BBN_NI_R_STATUS get_analogOut(double*);

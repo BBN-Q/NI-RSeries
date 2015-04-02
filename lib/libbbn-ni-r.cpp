@@ -71,6 +71,14 @@ BBN_NI_R_STATUS trigger_out(){
   return status;
 }
 
+BBN_NI_R_STATUS reset_fifo(){
+  //Pump stop-start to reset FIFO
+  //See http://zone.ni.com/reference/en-XX/help/371599H-01/lvfpgahelp/clearing_fpga_fifos/
+  NiFpga_Status status = NiFpga_StopFifo(session, NiFpga_SimpleDigitizer_VI_TargetToHostFifoI32_AIFIFO);
+  NiFpga_MergeStatus(&status, NiFpga_StartFifo(session, NiFpga_SimpleDigitizer_VI_TargetToHostFifoI32_AIFIFO));
+  return status;
+}
+
 BBN_NI_R_STATUS transfer_waveform(unsigned numPoints, double* data, double timeOut){
   // Ask for a number of points from the FIFO
   // Assumes memory has been correctly allocated by caller

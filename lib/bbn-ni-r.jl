@@ -38,6 +38,10 @@ function enable_acquisition()
   check_status(ccall((:enable_acquisition, "libbbn-ni-r"), Cint, ()))
 end
 
+function reset_fifo()
+  check_status(ccall((:reset_fifo, "libbbn-ni-r"), Cint, ()))
+end
+
 function disable_acquisition()
   check_status(ccall((:disable_acquisition, "libbbn-ni-r"), Cint, ()))
 end

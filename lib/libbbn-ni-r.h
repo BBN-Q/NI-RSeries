@@ -37,6 +37,8 @@ BBN_NI_R_STATUS transfer_waveform(unsigned, double*, double);
 BBN_NI_R_STATUS get_analogOut(double*);
 BBN_NI_R_STATUS get_analogIn(double*);
 
+BBN_NI_R_STATUS get_sampleCt(int32_t*);
+
 #ifdef __cplusplus
 }
 #endif

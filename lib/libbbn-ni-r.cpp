@@ -95,3 +95,7 @@ BBN_NI_R_STATUS get_analogIn(double* val){
   *val = static_cast<double>(val_int32) / (1 << 22);
   return status;
 }
+
+BBN_NI_R_STATUS get_sampleCt(int32_t* ct){
+  return NiFpga_ReadI32(session, NiFpga_SimpleDigitizer_VI_IndicatorI32_sampleCt, ct);
+};

@@ -28,6 +28,12 @@ function get_sampleInterval()
   return sampleInterval[]
 end
 
+function get_sampleCt()
+  sampleCt = Ref{Cint}(0)
+  check_status(ccall((:get_sampleCt, "libbbn-ni-r"), Cint, (Ref{Cint},), sampleCt))
+  return sampleCt[]
+end
+
 function enable_acquisition()
   check_status(ccall((:enable_acquisition, "libbbn-ni-r"), Cint, ()))
 end
